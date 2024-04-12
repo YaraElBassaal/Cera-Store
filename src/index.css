@@ -1,0 +1,13 @@
+/* .selected{
+    color:red
+} */
+.work{
+    color:yellow
+}
+.not-work{
+    color:black
+}
+.MuiPagination-ul li{
+    color:red;
+    /* background-color: black; */
+}
