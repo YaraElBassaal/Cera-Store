@@ -83,7 +83,12 @@ body {
  P , h4{
     color: darkgrey;
  }
- 
+
+.container{
+    width: 80%;
+    max-width: 900px;
+    margin-inline: auto;
+}
 .about-images{
     display: flex;
 position: relative;
