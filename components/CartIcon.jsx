@@ -1,9 +1,16 @@
 import { FaShoppingCart } from "react-icons/fa";
-export default function CartIcon(){
-    return (
-        <div className="cart-icon">
-            <FaShoppingCart className="cart-icon" />
-            <span className="cart-count">0</span>
-        </div>
-    )
+import React from "react";
+export default function CartIcon() {
+  // const [cartCount, setCartCount] = React.useState(Object.keys(JSON.parse(localStorage.getItem("savedProducts")).length);
+  function displayCartCount() {
+    const Count = JSON.parse(localStorage.getItem("savedProducts"));
+    console.log(Object.keys(Count).length);
+    setCartCount(Object.keys(Count).length);
+  }
+  return (
+    <div className="cart-icon">
+      <FaShoppingCart className="cart-icon" onMouseOver={displayCartCount} />
+      {/* <span className="cart-count">{cartCount}</span> */}
+    </div>
+  );
 }

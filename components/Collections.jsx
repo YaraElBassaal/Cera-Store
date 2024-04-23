@@ -8,6 +8,12 @@ export default function Collections() {
     start: 1,
     end: 10,
   });
+  const [savedProducts, setSavedProducts] = React.useState({});
+  if(Object.keys(savedProducts).length > 0){
+    localStorage.setItem("savedProducts", JSON.stringify(savedProducts))
+    
+  }
+
   const products = JSON.parse(localStorage.getItem("data"));
 
   const pagesNum = Math.ceil(products?.length / 10);
@@ -35,6 +41,14 @@ export default function Collections() {
     console.log(productsRange);
   }
 
+  function storeProducts(product,id){
+    setSavedProducts((prevSavedProducts) => ({
+      ...prevSavedProducts,
+      [id]: product
+    }));
+    console.log(savedProducts)
+    
+  }
   return (
     <section id="collections" className="collections">
       <h2 className="collections-title">Collections</h2>
@@ -43,26 +57,27 @@ export default function Collections() {
           <Link to={product.id}>
             <div className="prodect-info">
               <img
-                src={product.img}
+                src={product.image}
                 alt={product.title}
                 className="product-img"
               />
-              <h4 className="product-name">{product.name}</h4>
+              <h4 className="product-name">{product.title}</h4>
               <div className="product-price-colors">
-                <p className="product-price">{product.price}</p>
+                <p className="product-price">${product.price}</p>
                 <div className="product-colors">
                   {product.colors?.map((color) => (
-                    <div
+                    <span
                       key={color}
                       className="color"
                       style={{ backgroundColor: color }}
-                    />
+                    >
+                    </span>
                   ))}
                 </div>
               </div>
             </div>
           </Link>
-          <button className="add-to-cart">Add to cart</button>
+          <button className="add-to-cart" onClick={() => storeProducts(product,product.id)}>Add to cart</button>
         </div>
       ))}
       <Pagination
