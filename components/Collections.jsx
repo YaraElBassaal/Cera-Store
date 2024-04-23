@@ -9,9 +9,8 @@ export default function Collections() {
     end: 10,
   });
   const [savedProducts, setSavedProducts] = React.useState({});
-  if(Object.keys(savedProducts).length > 0){
-    localStorage.setItem("savedProducts", JSON.stringify(savedProducts))
-    
+  if (Object.keys(savedProducts).length > 0) {
+    localStorage.setItem("savedProducts", JSON.stringify(savedProducts));
   }
 
   const products = JSON.parse(localStorage.getItem("data"));
@@ -20,7 +19,7 @@ export default function Collections() {
 
   const displayedProducts = products?.slice(
     productsRange.start - 1,
-    productsRange.end
+    productsRange.end,
   );
 
   /**
@@ -41,13 +40,12 @@ export default function Collections() {
     console.log(productsRange);
   }
 
-  function storeProducts(product,id){
+  function storeProducts(product, id) {
     setSavedProducts((prevSavedProducts) => ({
       ...prevSavedProducts,
-      [id]: product
+      [id]: product,
     }));
-    console.log(savedProducts)
-    
+    console.log(savedProducts);
   }
   return (
     <section id="collections" className="collections">
@@ -70,14 +68,18 @@ export default function Collections() {
                       key={color}
                       className="color"
                       style={{ backgroundColor: color }}
-                    >
-                    </span>
+                    ></span>
                   ))}
                 </div>
               </div>
             </div>
           </Link>
-          <button className="add-to-cart" onClick={() => storeProducts(product,product.id)}>Add to cart</button>
+          <button
+            className="add-to-cart"
+            onClick={() => storeProducts(product, product.id)}
+          >
+            Add to cart
+          </button>
         </div>
       ))}
       <Pagination
