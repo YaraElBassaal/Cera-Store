@@ -1,17 +1,15 @@
 import { Outlet } from "react-router-dom";
 import Pagination from "@mui/material/Pagination";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 export default function Collections() {
   const [productsRange, setProductsRange] = React.useState({
     start: 1,
     end: 10,
   });
-  const [savedProducts, setSavedProducts] = React.useState({});
-  if (Object.keys(savedProducts).length > 0) {
-    localStorage.setItem("savedProducts", JSON.stringify(savedProducts));
-  }
+
+  const { savedProducts, storeProducts } = useOutletContext();
 
   const products = JSON.parse(localStorage.getItem("data"));
 
@@ -40,13 +38,6 @@ export default function Collections() {
     console.log(productsRange);
   }
 
-  function storeProducts(product, id) {
-    setSavedProducts((prevSavedProducts) => ({
-      ...prevSavedProducts,
-      [id]: product,
-    }));
-    console.log(savedProducts);
-  }
   return (
     <section id="collections" className="collections">
       <h2 className="collections-title">Collections</h2>

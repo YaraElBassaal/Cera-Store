@@ -4,7 +4,7 @@ import { NavHashLink } from "react-router-hash-link";
 
 import CartIcon from "./CartIcon";
 import React from "react";
-export default function Header() {
+export default function Header(props) {
   let [hashes, setHashes] = React.useState({
     home: "work",
     about: "not-work",
@@ -85,7 +85,7 @@ export default function Header() {
             Contact Us
           </NavLink>
         </nav>
-        <CartIcon></CartIcon>
+        <CartIcon {...props} />
       </div>
     </header>
   );
