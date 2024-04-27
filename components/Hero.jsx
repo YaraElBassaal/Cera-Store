@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState, useMemo } from "react";
+import ScrollToHashElement from "./ScrollToHashElement";
 const imgs = [
-  { src: "https://source.unsplash.com/random/300x300?r=1" },
-  { src: "https://source.unsplash.com/random/300x300?r=2" },
-  { src: "https://source.unsplash.com/random/300x300?r=3" },
+  { src: "./images/pngwing1.png" },
+  { src: "./images/pngwing2.png" },
+  { src: "./images/pngwing3.png" },
 ];
 export default function Hero() {
   const [img, setImg] = useState(imgs[0].src);
@@ -12,10 +13,11 @@ export default function Hero() {
   }
   return (
     <section className="hero-section">
+      <ScrollToHashElement />
       <div className="hero-intro">
         <h1>Cera</h1>
         <p>Shop the latest collection of clothing and accessories</p>
-        <Link to="collections" relative="path">
+        <Link to="#collections" relative="path">
           Shop Now
         </Link>
       </div>

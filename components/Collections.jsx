@@ -43,7 +43,7 @@ export default function Collections() {
       <h2 className="collections-title">Collections</h2>
       {displayedProducts?.map((product) => (
         <div className="product" key={product.id}>
-          <Link to={product.id}>
+          <Link to={`/${product.id}`}>
             <div className="prodect-info">
               <img
                 src={product.image}
@@ -54,11 +54,16 @@ export default function Collections() {
               <div className="product-price-colors">
                 <p className="product-price">${product.price}</p>
                 <div className="product-colors">
-                  {product.colors?.map((color) => (
+                  {product.colors.map((color) => (
                     <span
                       key={color}
                       className="color"
-                      style={{ backgroundColor: color }}
+                      style={{
+                        backgroundColor: color,
+                        width: "20px",
+                        height: "20px",
+                        display: "inline-block",
+                      }}
                     ></span>
                   ))}
                 </div>
@@ -66,11 +71,12 @@ export default function Collections() {
             </div>
           </Link>
           <button
-            className="add-to-cart"
-            onClick={() => storeProducts(product, product.id)}
+            className="add-to-favourite"
+            onClick={() => storeProducts(product)}
           >
-            Add to cart
+            Add to favourite
           </button>
+          <button className="buy-it-now">Buy it now</button>
         </div>
       ))}
       <Pagination

@@ -3,6 +3,7 @@ import ScrollToHashElement from "./ScrollToHashElement";
 import { NavHashLink } from "react-router-hash-link";
 
 import CartIcon from "./CartIcon";
+import FavouriteIcon from "./FavouriteIcon";
 import React from "react";
 export default function Header(props) {
   let [hashes, setHashes] = React.useState({
@@ -54,7 +55,6 @@ export default function Header(props) {
             className={hashes.home}
             onClick={() => makeActive("home")}
             to="/"
-            end
           >
             Home
           </NavLink>
@@ -62,8 +62,7 @@ export default function Header(props) {
           <NavLink
             className={hashes.about}
             onClick={() => makeActive("about")}
-            to="#about"
-            end
+            to="/#about"
           >
             About
           </NavLink>
@@ -71,8 +70,7 @@ export default function Header(props) {
           <NavLink
             className={hashes.collections}
             onClick={() => makeActive("collections")}
-            to="#collections"
-            reloadDocument
+            to="/#collections"
           >
             Collections
           </NavLink>
@@ -80,12 +78,13 @@ export default function Header(props) {
           <NavLink
             className={hashes.contact}
             onClick={() => makeActive("contact")}
-            to="#contact-us"
+            to="/#contact-us"
           >
             Contact Us
           </NavLink>
         </nav>
         <CartIcon {...props} />
+        <FavouriteIcon {...props} />
       </div>
     </header>
   );

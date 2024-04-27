@@ -4,12 +4,8 @@ import { Link, useOutletContext } from "react-router-dom";
 
 export default function CartIcon(props) {
   const { storeProducts, savedProducts } = props;
-  console.log(savedProducts);
-  const [cartCount, setCartCount] = React.useState(
-    JSON.parse(localStorage.getItem("savedProducts")),
-  );
   return (
-    <div className="cart-icon">
+    <div className="cart-product">
       <FaShoppingCart className="cart-icon" />
       <span className="cart-count">{savedProducts.length}</span>
     </div>
