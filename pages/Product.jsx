@@ -3,6 +3,7 @@ import { useParams, useOutletContext } from "react-router-dom";
 export default function Product() {
   const productID = useParams().id;
   const [product, setProduct] = React.useState({});
+  const [specificProduct, setSpecificProduct] = React.useState({});
   const [productDetail, setProductDetail] = React.useState({
     color: "",
     size: "",
@@ -18,11 +19,12 @@ export default function Product() {
         };
         console.log(newData);
         setProduct(newData);
+        setSpecificProduct(newData);
       }),
     );
   }, [productID]);
 
-  const { savedProducts, storeProducts } = useOutletContext();
+  const { cartProducts, storeCartProducts } = useOutletContext();
 
   const [productWantedQuantity, setWantedQuantity] = React.useState(0);
 
@@ -31,12 +33,24 @@ export default function Product() {
       ...prevProductDetail,
       color: color,
     }));
+    const newProduct = {
+      ...specificProduct,
+      colors: color,
+    };
+    console.log(newProduct);
+    setSpecificProduct(newProduct);
   }
   function setProductSize(size) {
     setProductDetail((prevProductDetail) => ({
       ...prevProductDetail,
       size: size,
     }));
+    const newProduct = {
+      ...specificProduct,
+      sizes: size,
+    };
+    console.log(newProduct);
+    setSpecificProduct(newProduct);
   }
   function increaseWantedQuantity() {
     setWantedQuantity((prevWantedQuantity) => prevWantedQuantity + 1);
@@ -101,8 +115,14 @@ export default function Product() {
         </div>
         <button
           className="product-btn"
-          onClick={() => storeProducts(product, productWantedQuantity)}
-          disabled={productWantedQuantity === 0}
+          onClick={() =>
+            storeCartProducts(specificProduct, productWantedQuantity)
+          }
+          disabled={
+            productDetail.color && productDetail.size && productWantedQuantity
+              ? false
+              : true
+          }
         >
           Add to cart
         </button>
