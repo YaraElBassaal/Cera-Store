@@ -133,6 +133,11 @@ export default function Product() {
         <button
           className="buy-it-now"
           onClick={() => addToCart(specificProduct, productWantedQuantity)}
+          disabled={
+            productDetail.color && productDetail.size && productWantedQuantity
+              ? false
+              : true
+          }
         >
           Buy now
         </button>

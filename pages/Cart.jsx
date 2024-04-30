@@ -1,12 +1,31 @@
-import { useOutletContext, useLocation } from "react-router-dom";
-export default function Cart() {
-  const savedCartProducts = useLocation().state;
+import { useOutletContext } from "react-router-dom";
+import { MdDelete } from "react-icons/md";
 
-  console.log(savedCartProducts);
+export default function Cart() {
+  const { cartProducts, setCartProducts } = useOutletContext();
+  console.log(cartProducts);
+  function deleteProduct(product) {
+    const newSavedCartProducts = cartProducts.filter(
+      (savedCartProduct) =>
+        savedCartProduct.id !== product.id ||
+        savedCartProduct.colors !== product.colors ||
+        savedCartProduct.sizes !== product.sizes,
+    );
+    localStorage.setItem("cartProducts", JSON.stringify(newSavedCartProducts));
+    setCartProducts(newSavedCartProducts);
+  }
+  if (cartProducts.length === 0) {
+    return (
+      <section className="cart">
+        <h1 className="cart-title">Your Cart</h1>
+        <p className="cart-empty-message">Your cart is empty</p>
+      </section>
+    );
+  }
   return (
     <section className="cart">
       <h1 className="cart-title">Your Cart</h1>
-      {savedCartProducts?.map((savedCartProduct) => {
+      {cartProducts?.map((savedCartProduct) => {
         return (
           <div
             className="cart-product"
@@ -26,11 +45,22 @@ export default function Cart() {
               </p>
               <div className="cart-product-detail">
                 <p>Color: {savedCartProduct.colors}</p>
-                <p>Quantity: {savedCartProduct.quantity}</p>
+                <p>Quantity: x{savedCartProduct.quantity}</p>
                 <p>Size: {savedCartProduct.sizes}</p>
               </div>
-              <p className="cart-product-price">{savedCartProduct.price}</p>
+              <div className="card-product-price-delete">
+                <p className="cart-product-price">{savedCartProduct.price}</p>
+                <button onClick={() => deleteProduct(savedCartProduct)}>
+                  <MdDelete />
+                </button>
+              </div>
             </div>
+            <hr />
+            <div className="cart-product-total">
+              <p>Total price:</p>
+              <p>{cartProducts.reduce((a, b) => a + b.price, 0)}</p>
+            </div>
+            <button className="cart-checkout">Checkout</button>
           </div>
         );
       })}

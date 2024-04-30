@@ -87,6 +87,7 @@ export default function RootLayout() {
             savedProducts,
             storeCartProducts,
             cartProducts,
+            setCartProducts,
           }}
         />
       </main>

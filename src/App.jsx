@@ -12,6 +12,7 @@ import Collections from "../components/Collections";
 import ContactUs from "../components/ContactUs";
 import Product from "../pages/Product";
 import Cart from "../pages/Cart";
+import Wishlist from "../pages/Wishlist";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route path="/:id" element={<Product />} />
       <Route path="#contact" element={<ContactUs />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/wishlist" element={<Wishlist />} />
     </Route>,
   ),
 );
