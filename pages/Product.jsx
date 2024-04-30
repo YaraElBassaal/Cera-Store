@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useOutletContext } from "react-router-dom";
+import { useParams, useOutletContext, useNavigate } from "react-router-dom";
 export default function Product() {
   const productID = useParams().id;
   const [product, setProduct] = React.useState({});
@@ -8,7 +8,8 @@ export default function Product() {
     color: "",
     size: "",
   });
-  console.log(productDetail);
+  const navigate = useNavigate();
+
   React.useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${productID}`).then((res) =>
       res.json().then((data) => {
@@ -59,7 +60,10 @@ export default function Product() {
   function decreaseWantedQuantity() {
     setWantedQuantity((prevWantedQuantity) => prevWantedQuantity - 1);
   }
-
+  function addToCart(specificProduct, productWantedQuantity) {
+    storeCartProducts(specificProduct, productWantedQuantity);
+    navigate("/cart");
+  }
   return (
     <section className="product">
       <div className="product-img">
@@ -114,7 +118,7 @@ export default function Product() {
           </button>
         </div>
         <button
-          className="product-btn"
+          className="add-to-cart"
           onClick={() =>
             storeCartProducts(specificProduct, productWantedQuantity)
           }
@@ -126,7 +130,12 @@ export default function Product() {
         >
           Add to cart
         </button>
-        <button className="product-btn">Buy now</button>
+        <button
+          className="buy-it-now"
+          onClick={() => addToCart(specificProduct, productWantedQuantity)}
+        >
+          Buy now
+        </button>
       </div>
     </section>
   );

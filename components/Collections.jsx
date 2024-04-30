@@ -1,16 +1,15 @@
 import { Outlet } from "react-router-dom";
 import Pagination from "@mui/material/Pagination";
 import React from "react";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, useOutletContext, useNavigate } from "react-router-dom";
 
-export default function Collections() {
+export default function Collections(props) {
   const [productsRange, setProductsRange] = React.useState({
     start: 1,
     end: 10,
   });
 
-  const { savedProducts, storeProducts } = useOutletContext();
-
+  const { storeProducts } = useOutletContext();
   const products = JSON.parse(localStorage.getItem("data"));
 
   const pagesNum = Math.ceil(products?.length / 10);
@@ -19,7 +18,7 @@ export default function Collections() {
     productsRange.start - 1,
     productsRange.end,
   );
-
+  const navigate = useNavigate();
   /**
    * Function to display the next set of products.
    *
@@ -37,7 +36,6 @@ export default function Collections() {
     });
     console.log(productsRange);
   }
-
   return (
     <section id="collections" className="collections">
       <h2 className="collections-title">Collections</h2>
@@ -76,7 +74,12 @@ export default function Collections() {
           >
             Add to favourite
           </button>
-          <button className="buy-it-now">Buy it now</button>
+          <button
+            className="buy-it-now"
+            onClick={() => navigate(`/${product.id}`)}
+          >
+            Buy it now
+          </button>
         </div>
       ))}
       <Pagination

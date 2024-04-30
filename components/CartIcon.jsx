@@ -6,8 +6,10 @@ export default function CartIcon(props) {
   const { cartProducts } = props;
   return (
     <div className="cart-product">
-      <FaShoppingCart className="cart-icon" />
-      <span className="cart-count">{cartProducts.length}</span>
+      <Link to="/cart" className="cart-icon-link" state={cartProducts}>
+        <FaShoppingCart className="cart-icon" />
+        <span className="cart-count">{cartProducts.length}</span>
+      </Link>
     </div>
   );
 }
