@@ -13,6 +13,7 @@ import ContactUs from "../components/ContactUs";
 import Product from "../pages/Product";
 import Cart from "../pages/Cart";
 import Wishlist from "../pages/Wishlist";
+import Payment from "../pages/Payment";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="#contact" element={<ContactUs />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/wishlist" element={<Wishlist />} />
+      <Route path="/payment" element={<Payment />} />
     </Route>,
   ),
 );
