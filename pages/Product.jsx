@@ -62,7 +62,7 @@ export default function Product() {
   }
   function addToCart(specificProduct, productWantedQuantity) {
     storeCartProducts(specificProduct, productWantedQuantity);
-    navigate("/cart");
+    navigate("/payment");
   }
   return (
     <section className="product">
