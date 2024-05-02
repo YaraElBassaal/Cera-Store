@@ -1,4 +1,11 @@
+import { useOutletContext } from "react-router-dom";
+import React from "react";
 export default function Payment() {
+  const { cartProducts } = useOutletContext();
+  const [paymentMethod, setPaymentMethod] = React.useState(null);
+  function handleChange(event) {
+    setPaymentMethod(event.target.value);
+  }
   return (
     <section className="payment">
       <div className="payment-method">
@@ -9,33 +16,73 @@ export default function Payment() {
             <input
               type="radio"
               name="payment-method"
-              id="paypal"
-              value="paypal"
+              id="cash-on-delivery"
+              value="cash-on-delivery"
+              onChange={handleChange}
             />
-            <label htmlFor="paypal">Paypal</label>
+            <label htmlFor="cash-on-delivery">Cash on delivery</label>
           </div>
           <div className="payment-method-option">
             <input
               type="radio"
               name="payment-method"
-              id="credit-card"
-              value="credit-card"
+              id="vf-cash"
+              value="vf-cash"
+              onChange={handleChange}
             />
-            <label htmlFor="credit-card">Credit Card</label>
-          </div>
-          <div className="payment-method-option">
-            <input
-              type="radio"
-              name="payment-method"
-              id="debit-card"
-              value="debit-card"
-            />
-            <label htmlFor="debit-card">Debit Card</label>
+            <label htmlFor="debit-card">VF Cash</label>
           </div>
         </div>
-        <button className="payment-method-submit">Payment</button>
+        <button className="payment-method-submit" disabled={!paymentMethod}>
+          Payment
+        </button>
       </div>
-      <div className="order-summary"></div>
+      <div className="order-summary">
+        <h1 className="order-summary-title">Order Summary</h1>
+        {cartProducts.map((product) => (
+          <div className="order-summary-product" key={product.id}>
+            <div className="order-summary-product-img">
+              <img src={product.image} alt={product.title} />
+            </div>
+            <div className="order-summary-product-info">
+              <h3 className="order-summary-product-title">{product.title}</h3>
+              <p className="order-summary-product-description">
+                {product.description}
+              </p>
+              <div className="order-summary-product-detail">
+                <p className="order-summary-product-color">
+                  Color: {product.colors}
+                </p>
+                <p className="order-summary-product-quantity">
+                  x{product.quantity}
+                </p>
+                <p className="order-summary-product-size">
+                  Size: {product.sizes}
+                </p>
+              </div>
+              <p className="order-summary-product-price">${product.price}</p>
+            </div>
+            <hr />
+          </div>
+        ))}
+        <div className="order-summary-total">
+          <p className="order-summary-total-text">Total</p>
+          <p className="order-summary-total-price">
+            ${cartProducts.reduce((a, b) => a + b.price, 0)}
+          </p>
+        </div>
+        <div className="order-summary-shipping">
+          <p className="order-summary-shipping-text">Shipping</p>
+          <p className="order-summary-shipping-price">$10</p>
+        </div>
+        <hr />
+        <div className="order-summary-total">
+          <p className="order-summary-total-text">Total</p>
+          <p className="order-summary-total-price">
+            ${cartProducts.reduce((a, b) => a + b.price, 0) + 10}
+          </p>
+        </div>
+      </div>
     </section>
   );
 }

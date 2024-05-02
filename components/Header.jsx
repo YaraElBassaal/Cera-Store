@@ -45,47 +45,49 @@ export default function Header(props) {
   }
   return (
     <header>
-      <div className="container">
-        <ScrollToHashElement />
-        <Link to="/" className="logo">
-          Cera
-        </Link>
-        <nav>
-          <NavLink
-            className={hashes.home}
-            onClick={() => makeActive("home")}
-            to="/"
-          >
-            Home
-          </NavLink>
+      <nav>
+        <div className="container">
+          <ScrollToHashElement />
+          <Link to="/" className="logo">
+            Cera
+          </Link>
+          <nav>
+            <NavLink
+              className={hashes.home}
+              onClick={() => makeActive("home")}
+              to="/"
+            >
+              Home
+            </NavLink>
 
-          <NavLink
-            className={hashes.about}
-            onClick={() => makeActive("about")}
-            to="/#about"
-          >
-            About
-          </NavLink>
+            <NavLink
+              className={hashes.about}
+              onClick={() => makeActive("about")}
+              to="/#about"
+            >
+              About
+            </NavLink>
 
-          <NavLink
-            className={hashes.collections}
-            onClick={() => makeActive("collections")}
-            to="/#collections"
-          >
-            Collections
-          </NavLink>
+            <NavLink
+              className={hashes.collections}
+              onClick={() => makeActive("collections")}
+              to="/#collections"
+            >
+              Collections
+            </NavLink>
 
-          <NavLink
-            className={hashes.contact}
-            onClick={() => makeActive("contact")}
-            to="/#contact-us"
-          >
-            Contact Us
-          </NavLink>
-        </nav>
-        <CartIcon {...props} />
-        <FavouriteIcon {...props} />
-      </div>
+            <NavLink
+              className={hashes.contact}
+              onClick={() => makeActive("contact")}
+              to="/#contact-us"
+            >
+              Contact Us
+            </NavLink>
+          </nav>
+          <CartIcon {...props} />
+          <FavouriteIcon {...props} />
+        </div>
+      </nav>
     </header>
   );
 }

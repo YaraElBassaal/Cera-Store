@@ -73,7 +73,8 @@ export default function Product() {
         <h1 className="product-title">{product.title}</h1>
         <p className="product-description">{product.description}</p>
         <p className="product-price">${product.price}</p>
-        <p className="product-colors">
+        <p className="product-color">Select Color</p>
+        <div className="product-colors">
           {product.colors?.map((color) => (
             <span
               key={color}
@@ -87,8 +88,9 @@ export default function Product() {
               onClick={() => setProductColor(color)}
             ></span>
           ))}
-        </p>
-        <p className="product-sizes">
+        </div>
+        <p className="product-size">Select Size</p>
+        <div className="product-sizes">
           {product.sizes?.map((size) => (
             <span
               key={size}
@@ -98,7 +100,7 @@ export default function Product() {
               {size}
             </span>
           ))}
-        </p>
+        </div>
         <div className="product-quantity">
           <button
             className="product-quantity-btn"
@@ -139,7 +141,7 @@ export default function Product() {
               : true
           }
         >
-          Buy now
+          Buy it now
         </button>
       </div>
     </section>

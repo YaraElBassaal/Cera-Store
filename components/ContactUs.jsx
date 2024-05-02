@@ -7,7 +7,6 @@ export default function ContactUs() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -29,7 +28,7 @@ export default function ContactUs() {
           {errors.name?.type === "required" ? (
             <span>This field is required</span>
           ) : (
-            errors.name?.type === "maxLength" && <span>Max lenght is 500</span>
+            errors.name?.type === "maxLength" && <span>Max lenght is 20</span>
           )}
 
           <input
